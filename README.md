@@ -1,6 +1,6 @@
 <!-- Centered Title Block -->
 <p align="center">
-  <img src="https://www.blackhatethicalhacking.com/wp-content/uploads/2022/06/BHEH_logo.png" width="280px">
+  <img src="https://blackhatethicalhacking.com/assets/images/Logo_Complete.png" width="280px">
 </p>
 
 <p align="center">
