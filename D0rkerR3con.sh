@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # ──────────────── ASCII & Quote ────────────────
 clear
@@ -26,7 +26,7 @@ echo ""
 # ──────────────── Internet Check ────────────────
 echo "CHECKING INTERNET CONNECTIVITY..." | lolcat
 wget -q --spider https://google.com || { echo "NO INTERNET — EXITING!" | lolcat; exit 1; }
-echo "INTERNET OK — LET’S GO ⚡" | lolcat
+echo "INTERNET OK — LET'S GO ⚡" | lolcat
 sleep 1
 
 # ──────────────── Tool Info ────────────────
@@ -139,10 +139,32 @@ function start_new_scan {
   fi
 
   while true; do
+    echo ""
+    echo "╔════════════════════════════════════════════════════════════╗" | lolcat
+    echo "║  📌 HOW TO SELECT DORKS:                                   ║" | lolcat
+    echo "║  • Use ↑/↓ arrow keys to navigate                          ║" | lolcat
+    echo "║  • Press SPACE to select/deselect (✓ = selected)           ║" | lolcat
+    echo "║  • Press ENTER when done selecting                         ║" | lolcat
+    echo "║  • Press ENTER without selecting to exit                   ║" | lolcat
+    echo "╚════════════════════════════════════════════════════════════╝" | lolcat
+    echo ""
+    
     OPTIONS=$(jq -r "$FILTER_JQ | \"[\" + .key + \"] \" + .value.name + \" — \" + .value.category" "$DORK_DB")
-    SELECTED=$(echo "$OPTIONS" | gum choose --no-limit)
-    [ -z "$SELECTED" ] && break
+    SELECTED=$(echo "$OPTIONS" | gum choose --no-limit --height=15)
+    
+    # Trim whitespace and check if anything was selected
+    SELECTED=$(echo "$SELECTED" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+    
+    if [[ -z "$SELECTED" ]] || [[ "${#SELECTED}" -eq 0 ]]; then
+      echo ""
+      echo "[!] No dorks selected. Exiting dork selection." | lolcat
+      break
+    fi
 
+    echo ""
+    echo "[+] Launching selected dorks..." | lolcat
+    echo ""
+    
     while read -r LINE; do
       ID=$(echo "$LINE" | grep -oE '^\[[0-9]+\]' | tr -d '[]')
 
@@ -171,9 +193,11 @@ function start_new_scan {
       sleep 0.3
     done <<< "$SELECTED"
 
+    echo ""
     gum confirm "Run more dorks for this domain?" || break
   done
 
+  echo ""
   gum confirm "Generate HTML / Markdown report?" && export_report "$DOMAIN_CLEAN"
   echo "[+] Scan complete for $DOMAIN" | lolcat
 }
