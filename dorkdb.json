@@ -1,70 +1,2938 @@
 {
-  "1": { "name": "Directory Listings", "dork": "intitle:index.of", "category": "File Exposure", "risk": "medium", "description": "Find open directory listings" },
-  "2": { "name": "Config Files", "dork": "ext:xml | ext:conf | ext:cnf | ext:reg | ext:inf | ext:rdp | ext:cfg | ext:txt | ext:ora | ext:ini", "category": "File Exposure", "risk": "high", "description": "Find exposed configuration files" },
-  "3": { "name": "Database Files", "dork": "ext:sql | ext:dbf | ext:mdb", "category": "File Exposure", "risk": "critical", "description": "Locate database files" },
-  "4": { "name": "Log Files", "dork": "ext:log", "category": "File Exposure", "risk": "high", "description": "Find log files" },
-  "5": { "name": "Backup Files", "dork": "ext:bkf | ext:bkp | ext:bak | ext:old | ext:backup", "category": "File Exposure", "risk": "high", "description": "Locate backup files" },
-  "6": { "name": "Login Pages", "dork": "intext:\"login\" | intitle:\"login\" | inurl:\"login\" | intext:\"username\" | intitle:\"username\" | inurl:\"username\" | intext:\"password\" | intitle:\"password\" | inurl:\"password\"", "category": "Web Applications", "risk": "low", "description": "Find login pages" },
-  "7": { "name": "SQL Errors", "dork": "intext:\"sql syntax near\" | intext:\"syntax error has occurred\" | intext:\"incorrect syntax near\" | intext:\"unexpected end of SQL command\" | intext:\"Warning: mysql_connect()\" | intext:\"Warning: mysql_query()\" | intext:\"Warning: pg_connect()\"", "category": "Web Applications", "risk": "high", "description": "Find SQL errors" },
-  "8": { "name": "Exposed Documents", "dork": "ext:doc | ext:docx | ext:odt | ext:pdf | ext:rtf | ext:sxw | ext:psw | ext:ppt | ext:pptx | ext:pps | ext:csv", "category": "File Exposure", "risk": "medium", "description": "Find exposed documents" },
-  "9": { "name": "phpinfo()", "dork": "ext:php intitle:phpinfo \"published by the PHP Group\"", "category": "Web Applications", "risk": "high", "description": "Find phpinfo() pages" },
-  "10": { "name": "WordPress Sites", "dork": "inurl:wp- | inurl:wp-content | inurl:plugins | inurl:uploads | inurl:themes | inurl:download", "category": "CMS Vulnerabilities", "risk": "medium", "description": "Identify WordPress installations" },
-  "11": { "name": "Finding Backdoors", "dork": "inurl:shell | inurl:backdoor | inurl:wso | inurl:cmd | shadow | passwd | boot.ini", "category": "Web Applications", "risk": "critical", "description": "Locate web shells" },
-  "12": { "name": "Install/Setup Files", "dork": "inurl:readme | inurl:license | inurl:install | inurl:setup | inurl:config", "category": "File Exposure", "risk": "medium", "description": "Find setup files" },
-  "13": { "name": "Open Redirects", "dork": "inurl:redir | inurl:url | inurl:redirect | inurl:return | inurl:src=http | inurl:r=http", "category": "Web Applications", "risk": "medium", "description": "Find open redirects" },
-  "14": { "name": "Apache STRUTS RCE", "dork": "ext:action | ext:struts | ext:do", "category": "Web Applications", "risk": "critical", "description": "Find Struts endpoints" },
-  "15": { "name": "Pastebin Entries", "dork": "", "category": "Code Repositories", "risk": "medium", "description": "Search Pastebin", "special": true, "url": "https://www.google.com/search?q=site:pastebin.com " },
-  "16": { "name": "LinkedIn Employees", "dork": "", "category": "Code Repositories", "risk": "low", "description": "Find employees", "special": true, "url": "https://www.google.com/search?q=site:linkedin.com employees " },
-  "17": { "name": ".htaccess /.git", "dork": "inurl:\".htaccess\" | inurl:\"/.git\"", "category": "Code Repositories", "risk": "high", "description": "Find exposed sensitive files" },
-  "18": { "name": "Subdomains", "dork": "site:*.", "category": "Domain Intelligence", "risk": "low", "description": "Find subdomains" },
-  "19": { "name": "Sub-subdomains", "dork": "site:*.*.", "category": "Domain Intelligence", "risk": "low", "description": "Find sub-subdomains" },
-  "20": { "name": "WordPress Files", "dork": "inurl:wp-content | inurl:wp-includes", "category": "CMS Vulnerabilities", "risk": "medium", "description": "Find WordPress files" },
-  "21": { "name": "GitHub Search", "dork": "", "category": "Code Repositories", "risk": "medium", "description": "Search GitHub", "special": true, "url": "https://github.com/search?q=", "suffix": "&type=host" },
-  "22": { "name": "CrossDomain.xml", "dork": "", "category": "Domain Intelligence", "risk": "medium", "description": "Check crossdomain.xml", "special": true, "url": "http://", "suffix": "/crossdomain.xml" },
-  "23": { "name": "ThreatCrowd", "dork": "", "category": "Domain Intelligence", "risk": "low", "description": "ThreatCrowd lookup", "special": true, "url": "https://threatcrowd.org/domain.php?domain=" },
-  "24": { "name": "SWF Files", "dork": "+inurl: +ext:swf", "category": "Flash / SWF", "risk": "medium", "description": "Find SWF files" },
-  "25": { "name": "MIME SWF", "dork": "", "category": "Flash / SWF", "risk": "medium", "description": "Find SWF by MIME", "special": true, "url": "https://yandex.com/search/?text=site:", "suffix": " mime:swf" },
-  "26": { "name": "Archived SWF", "dork": "", "category": "Flash / SWF", "risk": "low", "description": "Archived SWF files", "special": true, "url": "https://web.archive.org/cdx/search?url=", "suffix": "/&filter=urlkey:.*swf" },
-  "27": { "name": "Archived MIME SWF", "dork": "", "category": "Flash / SWF", "risk": "low", "description": "Archived SWF by MIME", "special": true, "url": "https://web.archive.org/cdx/search?url=", "suffix": "/&filter=mimetype:application/x-shockwave-flash" },
-  "28": { "name": "Wayback Search #1", "dork": "", "category": "Domain Intelligence", "risk": "low", "description": "Wayback Machine search", "special": true, "url": "https://web.archive.org/web/*/(", "suffix": ")" },
-  "29": { "name": "Wayback Search #2", "dork": "", "category": "Domain Intelligence", "risk": "low", "description": "Alternate Wayback search", "special": true, "url": "https://web.archive.org/web/*/", "suffix": "/*" },
-  "30": { "name": "Certificate Transparency", "dork": "", "category": "Domain Intelligence", "risk": "low", "description": "crt.sh certificate logs", "special": true, "url": "https://crt.sh/?q=%." },
-  "31": { "name": "OpenBugBounty", "dork": "", "category": "Bug Bounty", "risk": "low", "description": "OpenBugBounty reports", "special": true, "url": "https://www.openbugbounty.org/search/?search=", "suffix": "&type=host" },
-  "32": { "name": "Reddit Search", "dork": "", "category": "Code Repositories", "risk": "low", "description": "Search Reddit", "special": true, "url": "https://www.reddit.com/search/?q=" },
-  "33": { "name": "WP Config Backup", "dork": "", "category": "CMS Vulnerabilities", "risk": "high", "description": "Archived wp-config backups", "special": true, "url": "http://wwwb-dedup.us.archive.org:8083/cdx/search?url=", "suffix": "/&filter=urlkey:.*wp-config.*" },
-  "34": { "name": "Censys IPv4", "dork": "", "category": "Domain Intelligence", "risk": "low", "description": "Censys IPv4 search", "special": true, "url": "https://censys.io/ipv4?q=" },
-  "35": { "name": "Censys Domain", "dork": "", "category": "Domain Intelligence", "risk": "low", "description": "Censys domain search", "special": true, "url": "https://censys.io/domain?q=" },
-  "36": { "name": "Censys Certificates", "dork": "", "category": "Domain Intelligence", "risk": "low", "description": "Censys cert search", "special": true, "url": "https://censys.io/certificates?q=" },
-  "37": { "name": "Shodan Search", "dork": "", "category": "Domain Intelligence", "risk": "low", "description": "Shodan lookup", "special": true, "url": "https://www.shodan.io/search?query=" },
-  "38": { "name": "GeoServer", "dork": "inurl:\"/geoserver/ows?service=wfs\"", "category": "Web Applications", "risk": "high", "description": "Find GeoServer instances" },
-  "39": { "name": "ArcGIS REST", "dork": "intext:\"ArcGIS REST Services Directory\"", "category": "Web Applications", "risk": "high", "description": "Find ArcGIS endpoints" },
-  "40": { "name": "WP PDF Invoices", "dork": "intitle:\"index of /wpo_wcpdf\"", "category": "CMS Vulnerabilities", "risk": "medium", "description": "Find WordPress PDF invoices" },
-  "41": { "name": "main.yml", "dork": "intitle:\"index of\" \"main.yml\"", "category": "File Exposure", "risk": "high", "description": "Find main.yml files" },
-  "42": { "name": "Admin Portals", "dork": "inurl:/admin.aspx", "category": "Web Applications", "risk": "medium", "description": "Find admin portals" },
-  "43": { "name": "WP Juicy PDFs", "dork": "inurl:/wp-content/uploads/wpo_wcpdf", "category": "CMS Vulnerabilities", "risk": "medium", "description": "Find WordPress PDFs" },
-  "44": { "name": "File Upload Scripts", "dork": "inurl:uploadimage.php", "category": "File Uploads", "risk": "high", "description": "Find upload endpoints" },
-  "45": { "name": "Contact Form 7", "dork": "inurl:/wp-content/plugins/contact-form-7/", "category": "CMS Vulnerabilities", "risk": "medium", "description": "Find CF7 plugin" },
-  "46": { "name": "conf.php", "dork": "intitle:index.of conf.php", "category": "File Exposure", "risk": "high", "description": "Find conf.php files" },
-  "47": { "name": "Sharing API", "dork": "intitle:\"Sharing API Info\"", "category": "Web Applications", "risk": "medium", "description": "Find Sharing API info" },
-  "48": { "name": "Admin Backup ZIP", "dork": "intitle:\"Index of\" inurl:/backup/ \"admin.zip\"", "category": "File Exposure", "risk": "critical", "description": "Find admin backups" },
-  "49": { "name": "GitHub API Index", "dork": "intitle:\"index of\" github-api", "category": "Code Repositories", "risk": "medium", "description": "Find GitHub API dirs" },
-  "50": { "name": "WP Uploads", "dork": "inurl:wp-content/uploads/wcpa_uploads", "category": "CMS Vulnerabilities", "risk": "medium", "description": "Find WP uploads" },
-  "51": { "name": "Drupal Login", "dork": "inurl:user intitle:\"Drupal\" intext:\"Log in\"", "category": "CMS Vulnerabilities", "risk": "medium", "description": "Find Drupal login pages" },
-  "52": { "name": "Joomla DB", "dork": "inurl:/libraries/joomla/database/", "category": "CMS Vulnerabilities", "risk": "high", "description": "Find Joomla database files" },
-  "53": { "name": "SQL Queries in URL", "dork": "inurl:\"php?sql=select\"", "category": "Web Applications", "risk": "high", "description": "Find SQL queries" },
-  "54": { "name": "WP Config Exposure", "dork": "inurl:\"wp-content\" intitle:\"index.of\" wp-config.php", "category": "CMS Vulnerabilities", "risk": "critical", "description": "Find exposed wp-config" },
-  "55": { "name": "JSON-RPC", "dork": "inurl:json-rpc", "category": "Web Applications", "risk": "medium", "description": "Find JSON-RPC endpoints" },
-  "56": { "name": "download.php", "dork": "intitle:\"index of\" \"download.php?file=\"", "category": "File Uploads", "risk": "high", "description": "Find download scripts" },
-  "57": { "name": "JWKS RSA", "dork": "inurl:jwks-rsa", "category": "File Exposure", "risk": "medium", "description": "Find JWKS keys" },
-  "58": { "name": "WP Backups", "dork": "intext:backup inurl:wp-content intitle:index.of", "category": "CMS Vulnerabilities", "risk": "high", "description": "Find WP backups" },
-  "59": { "name": "MySQL Config", "dork": "intitle:index.of conf.mysql", "category": "File Exposure", "risk": "critical", "description": "Find MySQL configs" },
-  "60": { "name": "YAML Files", "dork": "intitle:\"index of\" users.yml | admin.yml | config.yml", "category": "File Exposure", "risk": "high", "description": "Find YAML config files" },
-  "61": { "name": "Docker Compose", "dork": "intitle:\"index of\" docker-compose.yml", "category": "File Exposure", "risk": "high", "description": "Find docker-compose files" },
-  "62": { "name": "pom.xml", "dork": "intitle:\"index of\" pom.xml", "category": "File Exposure", "risk": "medium", "description": "Find pom.xml files" },
-  "63": { "name": "/etc Directories", "dork": "intitle:\"Index of\" \"/etc\"", "category": "File Exposure", "risk": "critical", "description": "Find exposed /etc directories" },
-  "64": { "name": "SQL Directories", "dork": "\"sql\" \"parent directory\"", "category": "File Exposure", "risk": "high", "description": "Find SQL directories" },
-  "65": { "name": "API Endpoints", "dork": "inurl:api | inurl:/rest | inurl:/v1 | inurl:/v2 | inurl:/v3", "category": "API Exposure", "risk": "medium", "description": "Find API endpoints" },
-  "66": { "name": "API Docs / Swagger", "dork": "inurl:swagger | inurl:api-docs | inurl:apidocs", "category": "API Exposure", "risk": "low", "description": "Find API documentation" },
-  "67": { "name": "Sensitive Data PDFs", "dork": "\"date of birth\" ext:pdf", "category": "Sensitive Data Exposure", "risk": "critical", "description": "Find PII in PDFs" },
-  "68": { "name": "Exposed Config & Logs", "dork": "ext:log | ext:txt | ext:conf | ext:cnf | ext:ini | ext:env | ext:bak | ext:backup | ext:old | ext:git | ext:htpasswd | ext:json", "category": "File Exposure", "risk": "high", "description": "Find exposed configs, logs, backups" }
+  "0001": {
+    "id": "0001",
+    "name": "Index of \u2192 conf.php",
+    "dork": "intitle:\"index of\" \"conf.php\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed conf.php via open index",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0002": {
+    "id": "0002",
+    "name": "Index of \u2192 config.php",
+    "dork": "intitle:\"index of\" \"config.php\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed config.php via open index",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0003": {
+    "id": "0003",
+    "name": "Index of \u2192 wp-config.php",
+    "dork": "intitle:\"index of\" \"wp-config.php\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed wp-config.php",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0004": {
+    "id": "0004",
+    "name": "Index of \u2192 configuration.php",
+    "dork": "intitle:\"index of\" \"configuration.php\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed Joomla configuration.php",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0005": {
+    "id": "0005",
+    "name": "Index of \u2192 .env",
+    "dork": "intitle:\"index of\" \".env\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed .env environment file",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0006": {
+    "id": "0006",
+    "name": "Index of \u2192 docker-compose.yml",
+    "dork": "intitle:\"index of\" \"docker-compose.yml\"",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed docker-compose.yml",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0007": {
+    "id": "0007",
+    "name": "Index of \u2192 main.yml",
+    "dork": "intitle:\"index of\" \"main.yml\"",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed Ansible/CI main.yml",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0008": {
+    "id": "0008",
+    "name": "Index of \u2192 users.yml",
+    "dork": "intitle:\"index of\" \"users.yml\"",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed users.yml",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0009": {
+    "id": "0009",
+    "name": "Index of \u2192 secrets.yml",
+    "dork": "intitle:\"index of\" \"secrets.yml\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed Rails/K8s secrets.yml",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0010": {
+    "id": "0010",
+    "name": "Index of \u2192 credentials",
+    "dork": "intitle:\"index of\" \"credentials\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed credentials directory/file",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0011": {
+    "id": "0011",
+    "name": "Index of \u2192 id_rsa",
+    "dork": "intitle:\"index of\" \"id_rsa\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed SSH private keys",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0012": {
+    "id": "0012",
+    "name": "Index of \u2192 id_dsa",
+    "dork": "intitle:\"index of\" \"id_dsa\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed SSH DSA keys",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0013": {
+    "id": "0013",
+    "name": "Index of \u2192 .htpasswd",
+    "dork": "intitle:\"index of\" \".htpasswd\"",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed .htpasswd files",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0014": {
+    "id": "0014",
+    "name": "Index of \u2192 .htaccess",
+    "dork": "intitle:\"index of\" \".htaccess\"",
+    "category": "File Exposure",
+    "risk": "medium",
+    "description": "Exposed .htaccess files",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0015": {
+    "id": "0015",
+    "name": "Index of \u2192 pom.xml",
+    "dork": "intitle:\"index of\" \"pom.xml\"",
+    "category": "File Exposure",
+    "risk": "medium",
+    "description": "Exposed Maven pom.xml",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0016": {
+    "id": "0016",
+    "name": "Index of \u2192 web.config",
+    "dork": "intitle:\"index of\" \"web.config\"",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed IIS web.config",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0017": {
+    "id": "0017",
+    "name": "Index of \u2192 settings.py",
+    "dork": "intitle:\"index of\" \"settings.py\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed Django settings.py",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0018": {
+    "id": "0018",
+    "name": "Index of \u2192 database.yml",
+    "dork": "intitle:\"index of\" \"database.yml\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed Rails database.yml",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0019": {
+    "id": "0019",
+    "name": "Index of \u2192 backup.sql",
+    "dork": "intitle:\"index of\" \"backup.sql\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed SQL backup",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0020": {
+    "id": "0020",
+    "name": "Index of \u2192 dump.sql",
+    "dork": "intitle:\"index of\" \"dump.sql\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed SQL dump",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0021": {
+    "id": "0021",
+    "name": "Index of \u2192 admin.zip",
+    "dork": "intitle:\"index of\" \"admin.zip\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed admin backup archive",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0022": {
+    "id": "0022",
+    "name": "Index of \u2192 backup.zip",
+    "dork": "intitle:\"index of\" \"backup.zip\"",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed backup archive",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0023": {
+    "id": "0023",
+    "name": "Index of \u2192 www.zip",
+    "dork": "intitle:\"index of\" \"www.zip\"",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed site archive",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0024": {
+    "id": "0024",
+    "name": "Index of \u2192 site.tar.gz",
+    "dork": "intitle:\"index of\" \"site.tar.gz\"",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed site tarball",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0025": {
+    "id": "0025",
+    "name": "Index of \u2192 /etc",
+    "dork": "intitle:\"index of\" \"/etc\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed /etc directory",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0026": {
+    "id": "0026",
+    "name": "Index of \u2192 /proc",
+    "dork": "intitle:\"index of\" \"/proc\"",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed /proc directory",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0027": {
+    "id": "0027",
+    "name": "Index of \u2192 phpinfo.php",
+    "dork": "intitle:\"index of\" \"phpinfo.php\"",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed phpinfo page",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0028": {
+    "id": "0028",
+    "name": "Index of \u2192 robots.txt",
+    "dork": "intitle:\"index of\" \"robots.txt\"",
+    "category": "File Exposure",
+    "risk": "info",
+    "description": "robots.txt (recon)",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0029": {
+    "id": "0029",
+    "name": "Index of \u2192 sitemap.xml",
+    "dork": "intitle:\"index of\" \"sitemap.xml\"",
+    "category": "File Exposure",
+    "risk": "info",
+    "description": "sitemap.xml (recon)",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0030": {
+    "id": "0030",
+    "name": "Index of \u2192 error_log",
+    "dork": "intitle:\"index of\" \"error_log\"",
+    "category": "File Exposure",
+    "risk": "medium",
+    "description": "Exposed PHP error log",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0031": {
+    "id": "0031",
+    "name": "Index of \u2192 access.log",
+    "dork": "intitle:\"index of\" \"access.log\"",
+    "category": "File Exposure",
+    "risk": "medium",
+    "description": "Exposed access log",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0032": {
+    "id": "0032",
+    "name": "Index of \u2192 debug.log",
+    "dork": "intitle:\"index of\" \"debug.log\"",
+    "category": "File Exposure",
+    "risk": "medium",
+    "description": "Exposed debug log",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0033": {
+    "id": "0033",
+    "name": "Index of \u2192 .git",
+    "dork": "intitle:\"index of\" \".git\"",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed .git directory listing",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0034": {
+    "id": "0034",
+    "name": "Index of \u2192 .svn",
+    "dork": "intitle:\"index of\" \".svn\"",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed .svn directory",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0035": {
+    "id": "0035",
+    "name": "Index of \u2192 .DS_Store",
+    "dork": "intitle:\"index of\" \".DS_Store\"",
+    "category": "File Exposure",
+    "risk": "medium",
+    "description": "Exposed .DS_Store (dir structure leak)",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0036": {
+    "id": "0036",
+    "name": "Index of \u2192 npm-debug.log",
+    "dork": "intitle:\"index of\" \"npm-debug.log\"",
+    "category": "File Exposure",
+    "risk": "medium",
+    "description": "Exposed npm debug log",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0037": {
+    "id": "0037",
+    "name": "Index of \u2192 yarn-error.log",
+    "dork": "intitle:\"index of\" \"yarn-error.log\"",
+    "category": "File Exposure",
+    "risk": "medium",
+    "description": "Exposed yarn error log",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0038": {
+    "id": "0038",
+    "name": "Index of \u2192 composer.json",
+    "dork": "intitle:\"index of\" \"composer.json\"",
+    "category": "File Exposure",
+    "risk": "low",
+    "description": "Exposed composer.json",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0039": {
+    "id": "0039",
+    "name": "Index of \u2192 composer.lock",
+    "dork": "intitle:\"index of\" \"composer.lock\"",
+    "category": "File Exposure",
+    "risk": "low",
+    "description": "Exposed composer.lock",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0040": {
+    "id": "0040",
+    "name": "Index of \u2192 package.json",
+    "dork": "intitle:\"index of\" \"package.json\"",
+    "category": "File Exposure",
+    "risk": "low",
+    "description": "Exposed package.json",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0041": {
+    "id": "0041",
+    "name": "Index of \u2192 Gemfile",
+    "dork": "intitle:\"index of\" \"Gemfile\"",
+    "category": "File Exposure",
+    "risk": "low",
+    "description": "Exposed Gemfile",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0042": {
+    "id": "0042",
+    "name": "Index of \u2192 Dockerfile",
+    "dork": "intitle:\"index of\" \"Dockerfile\"",
+    "category": "File Exposure",
+    "risk": "low",
+    "description": "Exposed Dockerfile",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0043": {
+    "id": "0043",
+    "name": "Index of \u2192 terraform.tfstate",
+    "dork": "intitle:\"index of\" \"terraform.tfstate\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed Terraform state (contains secrets)",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0044": {
+    "id": "0044",
+    "name": "Index of \u2192 kubeconfig",
+    "dork": "intitle:\"index of\" \"kubeconfig\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed kubeconfig",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0045": {
+    "id": "0045",
+    "name": "Index of \u2192 credentials.json",
+    "dork": "intitle:\"index of\" \"credentials.json\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed credentials.json (GCP/service accounts)",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0046": {
+    "id": "0046",
+    "name": "Index of \u2192 service-account.json",
+    "dork": "intitle:\"index of\" \"service-account.json\"",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed GCP service account key",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0047": {
+    "id": "0047",
+    "name": "Index of \u2192 aws",
+    "dork": "intitle:\"index of\" \"aws\"",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed aws credential files",
+    "tags": [
+      "index-of",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0048": {
+    "id": "0048",
+    "name": "Config files",
+    "dork": "ext:xml | ext:conf | ext:cnf | ext:reg | ext:inf | ext:rdp | ext:cfg | ext:ini | ext:ora | ext:env | ext:yaml | ext:yml | ext:toml | ext:properties",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed configuration files",
+    "tags": [
+      "ext",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0049": {
+    "id": "0049",
+    "name": "Database files",
+    "dork": "ext:sql | ext:dbf | ext:mdb | ext:sqlite | ext:sqlitedb | ext:db | ext:db3 | ext:accdb",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed database files",
+    "tags": [
+      "ext",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0050": {
+    "id": "0050",
+    "name": "Backup files",
+    "dork": "ext:bak | ext:backup | ext:bkp | ext:bkf | ext:old | ext:orig | ext:save | ext:swp | ext:tmp | ext:~",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed backup / temp files",
+    "tags": [
+      "ext",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0051": {
+    "id": "0051",
+    "name": "Log files",
+    "dork": "ext:log | ext:logs",
+    "category": "File Exposure",
+    "risk": "medium",
+    "description": "Exposed log files",
+    "tags": [
+      "ext",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0052": {
+    "id": "0052",
+    "name": "Secret / key files",
+    "dork": "ext:pem | ext:key | ext:ppk | ext:pfx | ext:p12 | ext:keystore | ext:jks | ext:asc | ext:gpg",
+    "category": "File Exposure",
+    "risk": "critical",
+    "description": "Exposed private keys / certs",
+    "tags": [
+      "ext",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0053": {
+    "id": "0053",
+    "name": "Documents / PII",
+    "dork": "ext:pdf | ext:doc | ext:docx | ext:xls | ext:xlsx | ext:csv | ext:ppt | ext:pptx | ext:rtf | ext:odt",
+    "category": "File Exposure",
+    "risk": "medium",
+    "description": "Exposed documents (potential PII)",
+    "tags": [
+      "ext",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0054": {
+    "id": "0054",
+    "name": "Archives",
+    "dork": "ext:zip | ext:tar | ext:gz | ext:rar | ext:7z | ext:tgz",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed archives",
+    "tags": [
+      "ext",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0055": {
+    "id": "0055",
+    "name": "Source / scripts",
+    "dork": "ext:php~ | ext:phps | ext:inc | ext:bak.php | ext:java | ext:cs | ext:rb | ext:py | ext:go",
+    "category": "File Exposure",
+    "risk": "high",
+    "description": "Exposed source files",
+    "tags": [
+      "ext",
+      "file-exposure"
+    ],
+    "type": "search"
+  },
+  "0056": {
+    "id": "0056",
+    "name": "AWS Access Key in files",
+    "dork": "intext:\"AKIA\" ext:log | ext:txt | ext:json | ext:env",
+    "category": "Secrets & Keys",
+    "risk": "critical",
+    "description": "AWS access keys in indexed files",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0057": {
+    "id": "0057",
+    "name": "AWS Secret references",
+    "dork": "intext:\"aws_secret_access_key\"",
+    "category": "Secrets & Keys",
+    "risk": "critical",
+    "description": "AWS secret key references",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0058": {
+    "id": "0058",
+    "name": "Private RSA keys",
+    "dork": "intext:\"-----BEGIN RSA PRIVATE KEY-----\"",
+    "category": "Secrets & Keys",
+    "risk": "critical",
+    "description": "Leaked RSA private keys",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0059": {
+    "id": "0059",
+    "name": "OpenSSH private keys",
+    "dork": "intext:\"-----BEGIN OPENSSH PRIVATE KEY-----\"",
+    "category": "Secrets & Keys",
+    "risk": "critical",
+    "description": "Leaked OpenSSH private keys",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0060": {
+    "id": "0060",
+    "name": "PGP private keys",
+    "dork": "intext:\"-----BEGIN PGP PRIVATE KEY BLOCK-----\"",
+    "category": "Secrets & Keys",
+    "risk": "critical",
+    "description": "Leaked PGP private keys",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0061": {
+    "id": "0061",
+    "name": "Generic API key assignments",
+    "dork": "intext:\"api_key\" | intext:\"apikey\" | intext:\"client_secret\" ext:env | ext:json | ext:txt",
+    "category": "Secrets & Keys",
+    "risk": "high",
+    "description": "API key / secret assignments",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0062": {
+    "id": "0062",
+    "name": "Slack tokens",
+    "dork": "intext:\"xoxb-\" | intext:\"xoxp-\"",
+    "category": "Secrets & Keys",
+    "risk": "critical",
+    "description": "Slack bot/user tokens",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0063": {
+    "id": "0063",
+    "name": "Google API keys",
+    "dork": "intext:\"AIza\"",
+    "category": "Secrets & Keys",
+    "risk": "high",
+    "description": "Google API keys",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0064": {
+    "id": "0064",
+    "name": "Stripe secret keys",
+    "dork": "intext:\"sk_live_\"",
+    "category": "Secrets & Keys",
+    "risk": "critical",
+    "description": "Stripe live secret keys",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0065": {
+    "id": "0065",
+    "name": "Firebase configs",
+    "dork": "intext:\"firebaseio.com\" ext:json",
+    "category": "Secrets & Keys",
+    "risk": "medium",
+    "description": "Firebase config exposure",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0066": {
+    "id": "0066",
+    "name": "JDBC connection strings",
+    "dork": "intext:\"jdbc:mysql://\" | intext:\"jdbc:postgresql://\"",
+    "category": "Secrets & Keys",
+    "risk": "high",
+    "description": "Database connection strings with creds",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0067": {
+    "id": "0067",
+    "name": "MongoDB connection URIs",
+    "dork": "intext:\"mongodb://\" | intext:\"mongodb+srv://\"",
+    "category": "Secrets & Keys",
+    "risk": "high",
+    "description": "MongoDB URIs with creds",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0068": {
+    "id": "0068",
+    "name": "SMTP credentials",
+    "dork": "intext:\"smtp\" intext:\"password\" ext:env | ext:cfg | ext:ini",
+    "category": "Secrets & Keys",
+    "risk": "high",
+    "description": "SMTP credentials",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0069": {
+    "id": "0069",
+    "name": "DB passwords in configs",
+    "dork": "intext:\"DB_PASSWORD\" | intext:\"database_password\"",
+    "category": "Secrets & Keys",
+    "risk": "high",
+    "description": "Database passwords in config",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0070": {
+    "id": "0070",
+    "name": "JWT secrets",
+    "dork": "intext:\"jwt_secret\" | intext:\"JWT_SECRET\"",
+    "category": "Secrets & Keys",
+    "risk": "high",
+    "description": "JWT signing secrets",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0071": {
+    "id": "0071",
+    "name": "Twilio credentials",
+    "dork": "intext:\"TWILIO_AUTH_TOKEN\"",
+    "category": "Secrets & Keys",
+    "risk": "high",
+    "description": "Twilio auth tokens",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0072": {
+    "id": "0072",
+    "name": "SendGrid keys",
+    "dork": "intext:\"SG.\" ext:env | ext:txt",
+    "category": "Secrets & Keys",
+    "risk": "high",
+    "description": "SendGrid API keys",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0073": {
+    "id": "0073",
+    "name": "GitHub tokens",
+    "dork": "intext:\"ghp_\" | intext:\"github_token\"",
+    "category": "Secrets & Keys",
+    "risk": "critical",
+    "description": "GitHub personal access tokens",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0074": {
+    "id": "0074",
+    "name": "Mailgun keys",
+    "dork": "intext:\"key-\" intext:\"mailgun\"",
+    "category": "Secrets & Keys",
+    "risk": "high",
+    "description": "Mailgun API keys",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0075": {
+    "id": "0075",
+    "name": "Azure storage keys",
+    "dork": "intext:\"DefaultEndpointsProtocol\" intext:\"AccountKey=\"",
+    "category": "Secrets & Keys",
+    "risk": "critical",
+    "description": "Azure storage account keys",
+    "tags": [
+      "secrets",
+      "keys",
+      "confirmable"
+    ],
+    "type": "search"
+  },
+  "0076": {
+    "id": "0076",
+    "name": "Login portals",
+    "dork": "inurl:login | inurl:signin | intitle:login | intitle:\"sign in\"",
+    "category": "Auth & Panels",
+    "risk": "low",
+    "description": "Login/sign-in pages",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0077": {
+    "id": "0077",
+    "name": "Admin panels",
+    "dork": "inurl:admin | inurl:administrator | inurl:adminpanel | intitle:\"admin login\"",
+    "category": "Auth & Panels",
+    "risk": "medium",
+    "description": "Admin panels",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0078": {
+    "id": "0078",
+    "name": "phpMyAdmin",
+    "dork": "inurl:phpmyadmin | intitle:phpMyAdmin",
+    "category": "Auth & Panels",
+    "risk": "high",
+    "description": "phpMyAdmin interfaces",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0079": {
+    "id": "0079",
+    "name": "Adminer",
+    "dork": "intitle:\"Adminer\" inurl:adminer.php",
+    "category": "Auth & Panels",
+    "risk": "high",
+    "description": "Adminer DB panels",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0080": {
+    "id": "0080",
+    "name": "cPanel",
+    "dork": "inurl:cpanel | intitle:cPanel",
+    "category": "Auth & Panels",
+    "risk": "medium",
+    "description": "cPanel logins",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0081": {
+    "id": "0081",
+    "name": "Webmin",
+    "dork": "inurl:10000 intitle:webmin",
+    "category": "Auth & Panels",
+    "risk": "high",
+    "description": "Webmin panels",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0082": {
+    "id": "0082",
+    "name": "Jenkins",
+    "dork": "intitle:\"Dashboard [Jenkins]\"",
+    "category": "Auth & Panels",
+    "risk": "high",
+    "description": "Exposed Jenkins dashboards",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0083": {
+    "id": "0083",
+    "name": "Grafana",
+    "dork": "inurl:/login intitle:\"Grafana\"",
+    "category": "Auth & Panels",
+    "risk": "medium",
+    "description": "Grafana login",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0084": {
+    "id": "0084",
+    "name": "Kibana",
+    "dork": "inurl:app/kibana",
+    "category": "Auth & Panels",
+    "risk": "high",
+    "description": "Exposed Kibana",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0085": {
+    "id": "0085",
+    "name": "Jupyter notebooks",
+    "dork": "intitle:\"Jupyter\" inurl:/tree",
+    "category": "Auth & Panels",
+    "risk": "high",
+    "description": "Open Jupyter notebooks",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0086": {
+    "id": "0086",
+    "name": "Spring Boot Actuator",
+    "dork": "inurl:/actuator/health | inurl:/actuator/env",
+    "category": "Auth & Panels",
+    "risk": "high",
+    "description": "Spring Boot actuator endpoints",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0087": {
+    "id": "0087",
+    "name": "GitLab",
+    "dork": "intitle:\"GitLab\" inurl:/users/sign_in",
+    "category": "Auth & Panels",
+    "risk": "medium",
+    "description": "GitLab logins",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0088": {
+    "id": "0088",
+    "name": "Keycloak",
+    "dork": "inurl:/auth/realms",
+    "category": "Auth & Panels",
+    "risk": "medium",
+    "description": "Keycloak realms",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0089": {
+    "id": "0089",
+    "name": "Citrix",
+    "dork": "inurl:/vpn/index.html | intitle:\"Citrix Gateway\"",
+    "category": "Auth & Panels",
+    "risk": "high",
+    "description": "Citrix gateways",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0090": {
+    "id": "0090",
+    "name": "RDP web",
+    "dork": "inurl:/RDWeb/Pages",
+    "category": "Auth & Panels",
+    "risk": "high",
+    "description": "RD Web Access",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0091": {
+    "id": "0091",
+    "name": "VMware vSphere",
+    "dork": "intitle:\"VMware\" inurl:/ui",
+    "category": "Auth & Panels",
+    "risk": "high",
+    "description": "VMware vSphere UIs",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0092": {
+    "id": "0092",
+    "name": "Default credentials pages",
+    "dork": "intext:\"default password\" intitle:login",
+    "category": "Auth & Panels",
+    "risk": "medium",
+    "description": "Pages mentioning default passwords",
+    "tags": [
+      "auth",
+      "panels"
+    ],
+    "type": "search"
+  },
+  "0093": {
+    "id": "0093",
+    "name": "API endpoints",
+    "dork": "inurl:/api/ | inurl:/rest/ | inurl:/v1/ | inurl:/v2/ | inurl:/v3/",
+    "category": "API Exposure",
+    "risk": "medium",
+    "description": "API endpoints",
+    "tags": [
+      "api"
+    ],
+    "type": "search"
+  },
+  "0094": {
+    "id": "0094",
+    "name": "Swagger / OpenAPI",
+    "dork": "inurl:swagger | inurl:api-docs | inurl:openapi.json | intitle:\"Swagger UI\"",
+    "category": "API Exposure",
+    "risk": "medium",
+    "description": "API documentation",
+    "tags": [
+      "api"
+    ],
+    "type": "search"
+  },
+  "0095": {
+    "id": "0095",
+    "name": "GraphQL endpoints",
+    "dork": "inurl:/graphql | inurl:/graphiql",
+    "category": "API Exposure",
+    "risk": "medium",
+    "description": "GraphQL endpoints",
+    "tags": [
+      "api"
+    ],
+    "type": "search"
+  },
+  "0096": {
+    "id": "0096",
+    "name": "Postman collections",
+    "dork": "inurl:postman ext:json",
+    "category": "API Exposure",
+    "risk": "medium",
+    "description": "Exposed Postman collections",
+    "tags": [
+      "api"
+    ],
+    "type": "search"
+  },
+  "0097": {
+    "id": "0097",
+    "name": "WADL / WSDL",
+    "dork": "inurl:?wsdl | ext:wadl",
+    "category": "API Exposure",
+    "risk": "low",
+    "description": "SOAP WSDL/WADL",
+    "tags": [
+      "api"
+    ],
+    "type": "search"
+  },
+  "0098": {
+    "id": "0098",
+    "name": "API keys in JS",
+    "dork": "inurl:/js/ intext:\"api_key\" ext:js",
+    "category": "API Exposure",
+    "risk": "high",
+    "description": "API keys in JavaScript",
+    "tags": [
+      "api"
+    ],
+    "type": "search"
+  },
+  "0099": {
+    "id": "0099",
+    "name": "JSON-RPC",
+    "dork": "inurl:json-rpc | inurl:/rpc",
+    "category": "API Exposure",
+    "risk": "medium",
+    "description": "JSON-RPC endpoints",
+    "tags": [
+      "api"
+    ],
+    "type": "search"
+  },
+  "0100": {
+    "id": "0100",
+    "name": "Firebase REST",
+    "dork": "inurl:firebaseio.com",
+    "category": "API Exposure",
+    "risk": "medium",
+    "description": "Firebase REST databases",
+    "tags": [
+      "api"
+    ],
+    "type": "search"
+  },
+  "0101": {
+    "id": "0101",
+    "name": "S3 buckets (text)",
+    "dork": "inurl:s3.amazonaws.com | intitle:\"Index\" inurl:s3.amazonaws.com",
+    "category": "Cloud Storage",
+    "risk": "high",
+    "description": "Open S3 buckets",
+    "tags": [
+      "cloud",
+      "buckets"
+    ],
+    "type": "search"
+  },
+  "0102": {
+    "id": "0102",
+    "name": "S3 listed files",
+    "dork": "site:s3.amazonaws.com",
+    "category": "Cloud Storage",
+    "risk": "high",
+    "description": "Files on S3",
+    "tags": [
+      "cloud",
+      "buckets"
+    ],
+    "type": "special",
+    "url": "https://www.google.com/search?q=site:s3.amazonaws.com+",
+    "source": "google"
+  },
+  "0103": {
+    "id": "0103",
+    "name": "Google Cloud Storage",
+    "dork": "inurl:storage.googleapis.com",
+    "category": "Cloud Storage",
+    "risk": "high",
+    "description": "Open GCS buckets",
+    "tags": [
+      "cloud",
+      "buckets"
+    ],
+    "type": "search"
+  },
+  "0104": {
+    "id": "0104",
+    "name": "Azure Blob",
+    "dork": "inurl:blob.core.windows.net",
+    "category": "Cloud Storage",
+    "risk": "high",
+    "description": "Open Azure blob storage",
+    "tags": [
+      "cloud",
+      "buckets"
+    ],
+    "type": "search"
+  },
+  "0105": {
+    "id": "0105",
+    "name": "DigitalOcean Spaces",
+    "dork": "inurl:digitaloceanspaces.com",
+    "category": "Cloud Storage",
+    "risk": "high",
+    "description": "Open DO Spaces",
+    "tags": [
+      "cloud",
+      "buckets"
+    ],
+    "type": "search"
+  },
+  "0106": {
+    "id": "0106",
+    "name": "Firebase storage",
+    "dork": "inurl:firebasestorage.googleapis.com",
+    "category": "Cloud Storage",
+    "risk": "medium",
+    "description": "Firebase storage objects",
+    "tags": [
+      "cloud",
+      "buckets"
+    ],
+    "type": "search"
+  },
+  "0107": {
+    "id": "0107",
+    "name": "Backblaze B2",
+    "dork": "inurl:backblazeb2.com",
+    "category": "Cloud Storage",
+    "risk": "medium",
+    "description": "Backblaze B2 buckets",
+    "tags": [
+      "cloud",
+      "buckets"
+    ],
+    "type": "search"
+  },
+  "0108": {
+    "id": "0108",
+    "name": "WordPress core",
+    "dork": "inurl:wp-content | inurl:wp-includes | inurl:wp-admin",
+    "category": "CMS",
+    "risk": "low",
+    "description": "WordPress installs",
+    "tags": [
+      "cms"
+    ],
+    "type": "search"
+  },
+  "0109": {
+    "id": "0109",
+    "name": "WP config backups",
+    "dork": "intitle:\"index of\" \"wp-config.php.bak\" | \"wp-config.php.old\"",
+    "category": "CMS",
+    "risk": "critical",
+    "description": "WordPress config backups",
+    "tags": [
+      "cms"
+    ],
+    "type": "search"
+  },
+  "0110": {
+    "id": "0110",
+    "name": "WP debug.log",
+    "dork": "inurl:wp-content/debug.log",
+    "category": "CMS",
+    "risk": "medium",
+    "description": "WordPress debug logs",
+    "tags": [
+      "cms"
+    ],
+    "type": "search"
+  },
+  "0111": {
+    "id": "0111",
+    "name": "WP uploads dir listing",
+    "dork": "intitle:\"index of\" inurl:wp-content/uploads",
+    "category": "CMS",
+    "risk": "low",
+    "description": "Open WP uploads",
+    "tags": [
+      "cms"
+    ],
+    "type": "search"
+  },
+  "0112": {
+    "id": "0112",
+    "name": "WP plugin disclosure",
+    "dork": "inurl:wp-content/plugins/ intitle:\"index of\"",
+    "category": "CMS",
+    "risk": "medium",
+    "description": "WP plugin enumeration",
+    "tags": [
+      "cms"
+    ],
+    "type": "search"
+  },
+  "0113": {
+    "id": "0113",
+    "name": "Joomla config",
+    "dork": "inurl:configuration.php.bak | inurl:configuration.php-dist",
+    "category": "CMS",
+    "risk": "high",
+    "description": "Joomla config",
+    "tags": [
+      "cms"
+    ],
+    "type": "search"
+  },
+  "0114": {
+    "id": "0114",
+    "name": "Joomla admin",
+    "dork": "inurl:administrator/index.php intitle:Joomla",
+    "category": "CMS",
+    "risk": "medium",
+    "description": "Joomla admin",
+    "tags": [
+      "cms"
+    ],
+    "type": "search"
+  },
+  "0115": {
+    "id": "0115",
+    "name": "Drupal login",
+    "dork": "inurl:user intitle:\"Drupal\" intext:\"Log in\"",
+    "category": "CMS",
+    "risk": "medium",
+    "description": "Drupal login",
+    "tags": [
+      "cms"
+    ],
+    "type": "search"
+  },
+  "0116": {
+    "id": "0116",
+    "name": "Drupal CHANGELOG",
+    "dork": "inurl:CHANGELOG.txt intext:drupal",
+    "category": "CMS",
+    "risk": "low",
+    "description": "Drupal version via changelog",
+    "tags": [
+      "cms"
+    ],
+    "type": "search"
+  },
+  "0117": {
+    "id": "0117",
+    "name": "Magento admin",
+    "dork": "inurl:/admin intitle:Magento",
+    "category": "CMS",
+    "risk": "medium",
+    "description": "Magento admin",
+    "tags": [
+      "cms"
+    ],
+    "type": "search"
+  },
+  "0118": {
+    "id": "0118",
+    "name": "Magento config",
+    "dork": "inurl:app/etc/local.xml",
+    "category": "CMS",
+    "risk": "critical",
+    "description": "Magento local.xml (DB creds)",
+    "tags": [
+      "cms"
+    ],
+    "type": "search"
+  },
+  "0119": {
+    "id": "0119",
+    "name": "Laravel .env",
+    "dork": "inurl:.env intext:\"APP_KEY\"",
+    "category": "CMS",
+    "risk": "critical",
+    "description": "Laravel .env exposure",
+    "tags": [
+      "cms"
+    ],
+    "type": "search"
+  },
+  "0120": {
+    "id": "0120",
+    "name": "Laravel telescope",
+    "dork": "inurl:/telescope/requests",
+    "category": "CMS",
+    "risk": "high",
+    "description": "Laravel Telescope exposed",
+    "tags": [
+      "cms"
+    ],
+    "type": "search"
+  },
+  "0121": {
+    "id": "0121",
+    "name": "Symfony profiler",
+    "dork": "inurl:/_profiler",
+    "category": "CMS",
+    "risk": "high",
+    "description": "Symfony profiler exposed",
+    "tags": [
+      "cms"
+    ],
+    "type": "search"
+  },
+  "0122": {
+    "id": "0122",
+    "name": "SQL errors",
+    "dork": "intext:\"sql syntax near\" | intext:\"syntax error has occurred\" | intext:\"mysql_fetch\" | intext:\"ORA-01756\"",
+    "category": "Error Disclosure",
+    "risk": "high",
+    "description": "SQL error disclosure",
+    "tags": [
+      "errors",
+      "debug"
+    ],
+    "type": "search"
+  },
+  "0123": {
+    "id": "0123",
+    "name": "PHP warnings",
+    "dork": "intext:\"Warning: include(\" | intext:\"Fatal error:\" ext:php",
+    "category": "Error Disclosure",
+    "risk": "medium",
+    "description": "PHP error disclosure",
+    "tags": [
+      "errors",
+      "debug"
+    ],
+    "type": "search"
+  },
+  "0124": {
+    "id": "0124",
+    "name": "Stack traces",
+    "dork": "intext:\"Stack trace:\" | intext:\"Traceback (most recent call last)\"",
+    "category": "Error Disclosure",
+    "risk": "medium",
+    "description": "Stack traces",
+    "tags": [
+      "errors",
+      "debug"
+    ],
+    "type": "search"
+  },
+  "0125": {
+    "id": "0125",
+    "name": "Django debug",
+    "dork": "intext:\"DisallowedHost\" | intitle:\"Dj\u200bango\" \"DEBUG = True\"",
+    "category": "Error Disclosure",
+    "risk": "high",
+    "description": "Django debug pages",
+    "tags": [
+      "errors",
+      "debug"
+    ],
+    "type": "search"
+  },
+  "0126": {
+    "id": "0126",
+    "name": "ASP.NET errors",
+    "dork": "intext:\"Server Error in\" intext:\"Application\"",
+    "category": "Error Disclosure",
+    "risk": "medium",
+    "description": "ASP.NET error pages",
+    "tags": [
+      "errors",
+      "debug"
+    ],
+    "type": "search"
+  },
+  "0127": {
+    "id": "0127",
+    "name": "Whoops Laravel",
+    "dork": "intitle:\"Whoops! There was an error\"",
+    "category": "Error Disclosure",
+    "risk": "high",
+    "description": "Laravel Whoops error page",
+    "tags": [
+      "errors",
+      "debug"
+    ],
+    "type": "search"
+  },
+  "0128": {
+    "id": "0128",
+    "name": "Node stack traces",
+    "dork": "intext:\"at Object.<anonymous>\" intext:\"node_modules\"",
+    "category": "Error Disclosure",
+    "risk": "medium",
+    "description": "Node.js stack traces",
+    "tags": [
+      "errors",
+      "debug"
+    ],
+    "type": "search"
+  },
+  "0129": {
+    "id": "0129",
+    "name": "Webcams (generic)",
+    "dork": "inurl:/view.shtml | intitle:\"Live View / - AXIS\"",
+    "category": "Network Devices & IoT",
+    "risk": "medium",
+    "description": "Exposed webcams",
+    "tags": [
+      "iot",
+      "devices"
+    ],
+    "type": "search"
+  },
+  "0130": {
+    "id": "0130",
+    "name": "Hikvision",
+    "dork": "intext:\"Hikvision\" inurl:login",
+    "category": "Network Devices & IoT",
+    "risk": "medium",
+    "description": "Hikvision devices",
+    "tags": [
+      "iot",
+      "devices"
+    ],
+    "type": "search"
+  },
+  "0131": {
+    "id": "0131",
+    "name": "Dahua",
+    "dork": "intitle:\"WEB SERVICE\" inurl:login intext:Dahua",
+    "category": "Network Devices & IoT",
+    "risk": "medium",
+    "description": "Dahua devices",
+    "tags": [
+      "iot",
+      "devices"
+    ],
+    "type": "search"
+  },
+  "0132": {
+    "id": "0132",
+    "name": "Printers (HP)",
+    "dork": "intitle:\"HP LaserJet\" inurl:hp/device",
+    "category": "Network Devices & IoT",
+    "risk": "low",
+    "description": "Exposed HP printers",
+    "tags": [
+      "iot",
+      "devices"
+    ],
+    "type": "search"
+  },
+  "0133": {
+    "id": "0133",
+    "name": "Routers (generic)",
+    "dork": "intitle:\"router\" intitle:\"login\" inurl:/cgi-bin",
+    "category": "Network Devices & IoT",
+    "risk": "medium",
+    "description": "Exposed routers",
+    "tags": [
+      "iot",
+      "devices"
+    ],
+    "type": "search"
+  },
+  "0134": {
+    "id": "0134",
+    "name": "UPS devices",
+    "dork": "intitle:\"UPS Web/SNMP\"",
+    "category": "Network Devices & IoT",
+    "risk": "low",
+    "description": "UPS management",
+    "tags": [
+      "iot",
+      "devices"
+    ],
+    "type": "search"
+  },
+  "0135": {
+    "id": "0135",
+    "name": "SCADA/HMI",
+    "dork": "intitle:\"Niagara Web Launcher\" | inurl:/config/public/products",
+    "category": "Network Devices & IoT",
+    "risk": "high",
+    "description": "SCADA/HMI interfaces",
+    "tags": [
+      "iot",
+      "devices"
+    ],
+    "type": "search"
+  },
+  "0136": {
+    "id": "0136",
+    "name": "NAS (Synology)",
+    "dork": "intitle:\"Synology\" inurl:/webman",
+    "category": "Network Devices & IoT",
+    "risk": "medium",
+    "description": "Synology NAS",
+    "tags": [
+      "iot",
+      "devices"
+    ],
+    "type": "search"
+  },
+  "0137": {
+    "id": "0137",
+    "name": "NAS (QNAP)",
+    "dork": "intitle:\"QNAP\" inurl:/cgi-bin",
+    "category": "Network Devices & IoT",
+    "risk": "medium",
+    "description": "QNAP NAS",
+    "tags": [
+      "iot",
+      "devices"
+    ],
+    "type": "search"
+  },
+  "0138": {
+    "id": "0138",
+    "name": "VoIP (Asterisk)",
+    "dork": "intitle:\"Asterisk\" inurl:/panel",
+    "category": "Network Devices & IoT",
+    "risk": "medium",
+    "description": "Asterisk VoIP panels",
+    "tags": [
+      "iot",
+      "devices"
+    ],
+    "type": "search"
+  },
+  "0139": {
+    "id": "0139",
+    "name": "Open redirect params",
+    "dork": "inurl:redir | inurl:redirect= | inurl:url= | inurl:return= | inurl:next=",
+    "category": "Vuln Surface Params",
+    "risk": "medium",
+    "description": "Open-redirect-prone parameters",
+    "tags": [
+      "params",
+      "vuln-surface"
+    ],
+    "type": "search"
+  },
+  "0140": {
+    "id": "0140",
+    "name": "LFI/RFI params",
+    "dork": "inurl:file= | inurl:path= | inurl:page= | inurl:include=",
+    "category": "Vuln Surface Params",
+    "risk": "high",
+    "description": "LFI/RFI-prone parameters",
+    "tags": [
+      "params",
+      "vuln-surface"
+    ],
+    "type": "search"
+  },
+  "0141": {
+    "id": "0141",
+    "name": "SSRF params",
+    "dork": "inurl:dest= | inurl:uri= | inurl:continue= | inurl:feed= | inurl:host=",
+    "category": "Vuln Surface Params",
+    "risk": "high",
+    "description": "SSRF-prone parameters",
+    "tags": [
+      "params",
+      "vuln-surface"
+    ],
+    "type": "search"
+  },
+  "0142": {
+    "id": "0142",
+    "name": "SQLi params",
+    "dork": "inurl:id= | inurl:cat= | inurl:pid= | inurl:product=",
+    "category": "Vuln Surface Params",
+    "risk": "high",
+    "description": "SQLi-prone numeric parameters",
+    "tags": [
+      "params",
+      "vuln-surface"
+    ],
+    "type": "search"
+  },
+  "0143": {
+    "id": "0143",
+    "name": "XSS params",
+    "dork": "inurl:q= | inurl:search= | inurl:query= | inurl:keyword=",
+    "category": "Vuln Surface Params",
+    "risk": "medium",
+    "description": "Reflected-XSS-prone parameters",
+    "tags": [
+      "params",
+      "vuln-surface"
+    ],
+    "type": "search"
+  },
+  "0144": {
+    "id": "0144",
+    "name": "Command injection params",
+    "dork": "inurl:cmd= | inurl:exec= | inurl:command= | inurl:run=",
+    "category": "Vuln Surface Params",
+    "risk": "high",
+    "description": "Command-injection-prone parameters",
+    "tags": [
+      "params",
+      "vuln-surface"
+    ],
+    "type": "search"
+  },
+  "0145": {
+    "id": "0145",
+    "name": "Dev/staging subdomains",
+    "dork": "inurl:dev. | inurl:staging. | inurl:test. | inurl:uat. | inurl:qa.",
+    "category": "Dev & CI/CD",
+    "risk": "medium",
+    "description": "Dev/staging environments",
+    "tags": [
+      "devops",
+      "ci"
+    ],
+    "type": "search"
+  },
+  "0146": {
+    "id": "0146",
+    "name": "Git exposed configs",
+    "dork": "inurl:\".git/config\"",
+    "category": "Dev & CI/CD",
+    "risk": "high",
+    "description": "Exposed .git/config",
+    "tags": [
+      "devops",
+      "ci"
+    ],
+    "type": "search"
+  },
+  "0147": {
+    "id": "0147",
+    "name": "Env files in URL",
+    "dork": "inurl:.env -inurl:env.example",
+    "category": "Dev & CI/CD",
+    "risk": "critical",
+    "description": "Live .env files",
+    "tags": [
+      "devops",
+      "ci"
+    ],
+    "type": "search"
+  },
+  "0148": {
+    "id": "0148",
+    "name": "Jenkins script console",
+    "dork": "inurl:/script intitle:\"Jenkins\"",
+    "category": "Dev & CI/CD",
+    "risk": "critical",
+    "description": "Jenkins script console",
+    "tags": [
+      "devops",
+      "ci"
+    ],
+    "type": "search"
+  },
+  "0149": {
+    "id": "0149",
+    "name": "CI secrets (travis)",
+    "dork": "inurl:.travis.yml intext:secure",
+    "category": "Dev & CI/CD",
+    "risk": "medium",
+    "description": "Travis CI secrets",
+    "tags": [
+      "devops",
+      "ci"
+    ],
+    "type": "search"
+  },
+  "0150": {
+    "id": "0150",
+    "name": "GitHub Actions secrets",
+    "dork": "inurl:.github/workflows ext:yml intext:secrets.",
+    "category": "Dev & CI/CD",
+    "risk": "low",
+    "description": "GitHub Actions workflow refs",
+    "tags": [
+      "devops",
+      "ci"
+    ],
+    "type": "search"
+  },
+  "0151": {
+    "id": "0151",
+    "name": "Sentry DSN",
+    "dork": "intext:\"sentry.io\" intext:\"dsn\"",
+    "category": "Dev & CI/CD",
+    "risk": "medium",
+    "description": "Exposed Sentry DSNs",
+    "tags": [
+      "devops",
+      "ci"
+    ],
+    "type": "search"
+  },
+  "0152": {
+    "id": "0152",
+    "name": "Shodan (host)",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "Shodan host search",
+    "tags": [
+      "pivot",
+      "shodan"
+    ],
+    "type": "special",
+    "url": "https://www.shodan.io/search?query=hostname:",
+    "source": "shodan"
+  },
+  "0153": {
+    "id": "0153",
+    "name": "Censys hosts",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "Censys host search",
+    "tags": [
+      "pivot",
+      "censys"
+    ],
+    "type": "special",
+    "url": "https://search.censys.io/search?resource=hosts&q=",
+    "source": "censys"
+  },
+  "0154": {
+    "id": "0154",
+    "name": "FOFA",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "FOFA search",
+    "tags": [
+      "pivot",
+      "fofa"
+    ],
+    "type": "special",
+    "url": "https://fofa.info/result?qbase64=",
+    "source": "fofa"
+  },
+  "0155": {
+    "id": "0155",
+    "name": "ZoomEye",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "ZoomEye search",
+    "tags": [
+      "pivot",
+      "zoomeye"
+    ],
+    "type": "special",
+    "url": "https://www.zoomeye.org/searchResult?q=",
+    "source": "zoomeye"
+  },
+  "0156": {
+    "id": "0156",
+    "name": "BinaryEdge",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "BinaryEdge search",
+    "tags": [
+      "pivot",
+      "binaryedge"
+    ],
+    "type": "special",
+    "url": "https://app.binaryedge.io/services/query?query=",
+    "source": "binaryedge"
+  },
+  "0157": {
+    "id": "0157",
+    "name": "GreyNoise",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "GreyNoise lookup",
+    "tags": [
+      "pivot",
+      "greynoise"
+    ],
+    "type": "special",
+    "url": "https://viz.greynoise.io/query/?gnql=",
+    "source": "greynoise"
+  },
+  "0158": {
+    "id": "0158",
+    "name": "crt.sh (CT logs)",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "Certificate Transparency subdomains",
+    "tags": [
+      "pivot",
+      "crtsh"
+    ],
+    "type": "special",
+    "url": "https://crt.sh/?q=%25.",
+    "source": "crtsh"
+  },
+  "0159": {
+    "id": "0159",
+    "name": "CertSpotter",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "CertSpotter CT logs",
+    "tags": [
+      "pivot",
+      "certspotter"
+    ],
+    "type": "special",
+    "url": "https://api.certspotter.com/v1/issuances?domain=",
+    "suffix": "&include_subdomains=true&expand=dns_names",
+    "source": "certspotter"
+  },
+  "0160": {
+    "id": "0160",
+    "name": "Wayback URLs",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "Wayback Machine archived URLs",
+    "tags": [
+      "pivot",
+      "wayback"
+    ],
+    "type": "special",
+    "url": "https://web.archive.org/cdx/search/cdx?url=",
+    "suffix": "/*&output=text&fl=original&collapse=urlkey",
+    "source": "wayback"
+  },
+  "0161": {
+    "id": "0161",
+    "name": "GitHub code search",
+    "dork": "",
+    "category": "Code Repositories",
+    "risk": "medium",
+    "description": "GitHub code search for domain",
+    "tags": [
+      "pivot",
+      "github"
+    ],
+    "type": "special",
+    "url": "https://github.com/search?type=code&q=",
+    "source": "github"
+  },
+  "0162": {
+    "id": "0162",
+    "name": "GitLab search",
+    "dork": "",
+    "category": "Code Repositories",
+    "risk": "medium",
+    "description": "GitLab code search",
+    "tags": [
+      "pivot",
+      "gitlab"
+    ],
+    "type": "special",
+    "url": "https://gitlab.com/search?search=",
+    "source": "gitlab"
+  },
+  "0163": {
+    "id": "0163",
+    "name": "GrayHatWarfare buckets",
+    "dork": "",
+    "category": "Cloud Storage",
+    "risk": "high",
+    "description": "Open bucket file search",
+    "tags": [
+      "pivot",
+      "grayhatwarfare"
+    ],
+    "type": "special",
+    "url": "https://buckets.grayhatwarfare.com/results/",
+    "source": "grayhatwarfare"
+  },
+  "0164": {
+    "id": "0164",
+    "name": "PublicWWW source search",
+    "dork": "",
+    "category": "Code Repositories",
+    "risk": "medium",
+    "description": "Source-code search across the web",
+    "tags": [
+      "pivot",
+      "publicwww"
+    ],
+    "type": "special",
+    "url": "https://publicwww.com/websites/",
+    "suffix": "/",
+    "source": "publicwww"
+  },
+  "0165": {
+    "id": "0165",
+    "name": "IntelX leaks",
+    "dork": "",
+    "category": "Leaks & Pastes",
+    "risk": "medium",
+    "description": "Intelligence X leak search",
+    "tags": [
+      "pivot",
+      "intelx"
+    ],
+    "type": "special",
+    "url": "https://intelx.io/?s=",
+    "source": "intelx"
+  },
+  "0166": {
+    "id": "0166",
+    "name": "Pastebin mentions",
+    "dork": "",
+    "category": "Leaks & Pastes",
+    "risk": "medium",
+    "description": "Pastebin mentions",
+    "tags": [
+      "pivot",
+      "pastebin"
+    ],
+    "type": "special",
+    "url": "https://www.google.com/search?q=site:pastebin.com+",
+    "source": "pastebin"
+  },
+  "0167": {
+    "id": "0167",
+    "name": "DeHashed",
+    "dork": "",
+    "category": "Leaks & Pastes",
+    "risk": "medium",
+    "description": "DeHashed breach search",
+    "tags": [
+      "pivot",
+      "dehashed"
+    ],
+    "type": "special",
+    "url": "https://www.dehashed.com/search?query=",
+    "source": "dehashed"
+  },
+  "0168": {
+    "id": "0168",
+    "name": "LinkedIn employees",
+    "dork": "",
+    "category": "People OSINT",
+    "risk": "low",
+    "description": "Employee enumeration",
+    "tags": [
+      "pivot",
+      "linkedin"
+    ],
+    "type": "special",
+    "url": "https://www.google.com/search?q=site:linkedin.com/in+\"",
+    "suffix": "\"",
+    "source": "linkedin"
+  },
+  "0169": {
+    "id": "0169",
+    "name": "Hunter.io emails",
+    "dork": "",
+    "category": "People OSINT",
+    "risk": "low",
+    "description": "Email pattern discovery",
+    "tags": [
+      "pivot",
+      "hunter"
+    ],
+    "type": "special",
+    "url": "https://hunter.io/search/",
+    "source": "hunter"
+  },
+  "0170": {
+    "id": "0170",
+    "name": "DNSDumpster",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "Passive DNS map",
+    "tags": [
+      "pivot",
+      "dnsdumpster"
+    ],
+    "type": "special",
+    "url": "https://dnsdumpster.com/?q=",
+    "source": "dnsdumpster"
+  },
+  "0171": {
+    "id": "0171",
+    "name": "ViewDNS",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "ViewDNS reverse tools",
+    "tags": [
+      "pivot",
+      "viewdns"
+    ],
+    "type": "special",
+    "url": "https://viewdns.info/reverseip/?host=",
+    "suffix": "&t=1",
+    "source": "viewdns"
+  },
+  "0172": {
+    "id": "0172",
+    "name": "SecurityTrails",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "SecurityTrails history",
+    "tags": [
+      "pivot",
+      "securitytrails"
+    ],
+    "type": "special",
+    "url": "https://securitytrails.com/domain/",
+    "suffix": "/dns",
+    "source": "securitytrails"
+  },
+  "0173": {
+    "id": "0173",
+    "name": "urlscan.io",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "urlscan historical scans",
+    "tags": [
+      "pivot",
+      "urlscan"
+    ],
+    "type": "special",
+    "url": "https://urlscan.io/search/#",
+    "source": "urlscan"
+  },
+  "0174": {
+    "id": "0174",
+    "name": "VirusTotal domain",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "VirusTotal relations",
+    "tags": [
+      "pivot",
+      "virustotal"
+    ],
+    "type": "special",
+    "url": "https://www.virustotal.com/gui/domain/",
+    "suffix": "/relations",
+    "source": "virustotal"
+  },
+  "0175": {
+    "id": "0175",
+    "name": "AbuseIPDB",
+    "dork": "",
+    "category": "Domain Intelligence",
+    "risk": "low",
+    "description": "AbuseIPDB reputation",
+    "tags": [
+      "pivot",
+      "abuseipdb"
+    ],
+    "type": "special",
+    "url": "https://www.abuseipdb.com/check/",
+    "source": "abuseipdb"
+  },
+  "0176": {
+    "id": "0176",
+    "name": "OpenBugBounty",
+    "dork": "",
+    "category": "Bug Bounty",
+    "risk": "low",
+    "description": "Public vuln reports",
+    "tags": [
+      "pivot",
+      "openbugbounty"
+    ],
+    "type": "special",
+    "url": "https://www.openbugbounty.org/search/?search=",
+    "suffix": "&type=host",
+    "source": "openbugbounty"
+  },
+  "0177": {
+    "id": "0177",
+    "name": "Probe /.env",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "critical",
+    "description": "Live Laravel/Node .env with secrets",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/.env",
+    "confirm": true
+  },
+  "0178": {
+    "id": "0178",
+    "name": "Probe /.env.local",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "critical",
+    "description": "Local env overrides",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/.env.local",
+    "confirm": true
+  },
+  "0179": {
+    "id": "0179",
+    "name": "Probe /.env.production",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "critical",
+    "description": "Production env",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/.env.production",
+    "confirm": true
+  },
+  "0180": {
+    "id": "0180",
+    "name": "Probe /.git/config",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "high",
+    "description": "Git config (repo URL, maybe creds)",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/.git/config",
+    "confirm": true
+  },
+  "0181": {
+    "id": "0181",
+    "name": "Probe /.git/HEAD",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "medium",
+    "description": "Git repo presence",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/.git/HEAD",
+    "confirm": false
+  },
+  "0182": {
+    "id": "0182",
+    "name": "Probe /.svn/entries",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "medium",
+    "description": "SVN repo presence",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/.svn/entries",
+    "confirm": false
+  },
+  "0183": {
+    "id": "0183",
+    "name": "Probe /.aws/credentials",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "critical",
+    "description": "AWS credentials file",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/.aws/credentials",
+    "confirm": true
+  },
+  "0184": {
+    "id": "0184",
+    "name": "Probe /config.json",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "high",
+    "description": "App config.json",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/config.json",
+    "confirm": true
+  },
+  "0185": {
+    "id": "0185",
+    "name": "Probe /config.php.bak",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "critical",
+    "description": "PHP config backup",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/config.php.bak",
+    "confirm": true
+  },
+  "0186": {
+    "id": "0186",
+    "name": "Probe /wp-config.php.bak",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "critical",
+    "description": "WordPress config backup",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/wp-config.php.bak",
+    "confirm": true
+  },
+  "0187": {
+    "id": "0187",
+    "name": "Probe /wp-config.php~",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "critical",
+    "description": "WordPress config tilde backup",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/wp-config.php~",
+    "confirm": true
+  },
+  "0188": {
+    "id": "0188",
+    "name": "Probe /.DS_Store",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "medium",
+    "description": "macOS directory listing leak",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/.DS_Store",
+    "confirm": false
+  },
+  "0189": {
+    "id": "0189",
+    "name": "Probe /phpinfo.php",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "high",
+    "description": "phpinfo page",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/phpinfo.php",
+    "confirm": false
+  },
+  "0190": {
+    "id": "0190",
+    "name": "Probe /server-status",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "medium",
+    "description": "Apache server-status",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/server-status",
+    "confirm": false
+  },
+  "0191": {
+    "id": "0191",
+    "name": "Probe /server-info",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "medium",
+    "description": "Apache server-info",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/server-info",
+    "confirm": false
+  },
+  "0192": {
+    "id": "0192",
+    "name": "Probe /actuator/env",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "high",
+    "description": "Spring Boot env (secrets)",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/actuator/env",
+    "confirm": true
+  },
+  "0193": {
+    "id": "0193",
+    "name": "Probe /actuator/health",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "low",
+    "description": "Spring Boot health",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/actuator/health",
+    "confirm": false
+  },
+  "0194": {
+    "id": "0194",
+    "name": "Probe /actuator/heapdump",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "critical",
+    "description": "Spring Boot heapdump (memory secrets)",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/actuator/heapdump",
+    "confirm": false
+  },
+  "0195": {
+    "id": "0195",
+    "name": "Probe /debug/default/view",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "high",
+    "description": "Yii debug toolbar",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/debug/default/view",
+    "confirm": false
+  },
+  "0196": {
+    "id": "0196",
+    "name": "Probe /_profiler/phpinfo",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "medium",
+    "description": "Symfony profiler phpinfo",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/_profiler/phpinfo",
+    "confirm": false
+  },
+  "0197": {
+    "id": "0197",
+    "name": "Probe /telescope/requests",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "high",
+    "description": "Laravel Telescope",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/telescope/requests",
+    "confirm": false
+  },
+  "0198": {
+    "id": "0198",
+    "name": "Probe /.well-known/security.txt",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "info",
+    "description": "security.txt (contact)",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/.well-known/security.txt",
+    "confirm": false
+  },
+  "0199": {
+    "id": "0199",
+    "name": "Probe /backup.zip",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "high",
+    "description": "Backup archive",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/backup.zip",
+    "confirm": false
+  },
+  "0200": {
+    "id": "0200",
+    "name": "Probe /backup.sql",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "critical",
+    "description": "SQL backup",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/backup.sql",
+    "confirm": true
+  },
+  "0201": {
+    "id": "0201",
+    "name": "Probe /dump.sql",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "critical",
+    "description": "SQL dump",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/dump.sql",
+    "confirm": true
+  },
+  "0202": {
+    "id": "0202",
+    "name": "Probe /credentials.json",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "critical",
+    "description": "Service account credentials",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/credentials.json",
+    "confirm": true
+  },
+  "0203": {
+    "id": "0203",
+    "name": "Probe /.npmrc",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "high",
+    "description": "npm registry token",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/.npmrc",
+    "confirm": true
+  },
+  "0204": {
+    "id": "0204",
+    "name": "Probe /.dockercfg",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "high",
+    "description": "Docker registry creds",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/.dockercfg",
+    "confirm": true
+  },
+  "0205": {
+    "id": "0205",
+    "name": "Probe /docker-compose.yml",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "high",
+    "description": "Compose with env secrets",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/docker-compose.yml",
+    "confirm": true
+  },
+  "0206": {
+    "id": "0206",
+    "name": "Probe /sftp-config.json",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "high",
+    "description": "Sublime SFTP creds",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/sftp-config.json",
+    "confirm": true
+  },
+  "0207": {
+    "id": "0207",
+    "name": "Probe /.vscode/sftp.json",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "high",
+    "description": "VSCode SFTP creds",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/.vscode/sftp.json",
+    "confirm": true
+  },
+  "0208": {
+    "id": "0208",
+    "name": "Probe /storage/logs/laravel.log",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "medium",
+    "description": "Laravel log",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/storage/logs/laravel.log",
+    "confirm": true
+  },
+  "0209": {
+    "id": "0209",
+    "name": "Probe /api/swagger.json",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "low",
+    "description": "Swagger spec",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/api/swagger.json",
+    "confirm": false
+  },
+  "0210": {
+    "id": "0210",
+    "name": "Probe /graphql",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "medium",
+    "description": "GraphQL endpoint",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/graphql",
+    "confirm": false
+  },
+  "0211": {
+    "id": "0211",
+    "name": "Probe /.env.bak",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "critical",
+    "description": "Env backup",
+    "tags": [
+      "probe",
+      "active",
+      "confirmable"
+    ],
+    "type": "probe",
+    "path": "/.env.bak",
+    "confirm": true
+  },
+  "0212": {
+    "id": "0212",
+    "name": "Probe /security.txt",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "info",
+    "description": "security.txt",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/security.txt",
+    "confirm": false
+  },
+  "0213": {
+    "id": "0213",
+    "name": "Probe /crossdomain.xml",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "low",
+    "description": "Flash crossdomain policy",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/crossdomain.xml",
+    "confirm": false
+  },
+  "0214": {
+    "id": "0214",
+    "name": "Probe /clientaccesspolicy.xml",
+    "dork": "",
+    "category": "Active Exposure Probe",
+    "risk": "low",
+    "description": "Silverlight policy",
+    "tags": [
+      "probe",
+      "active"
+    ],
+    "type": "probe",
+    "path": "/clientaccesspolicy.xml",
+    "confirm": false
+  }
 }

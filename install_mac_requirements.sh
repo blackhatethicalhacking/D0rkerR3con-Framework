@@ -1,31 +1,18 @@
 #!/bin/bash
+# D0rkerR3con v2 — macOS setup
+set -e
+echo "[*] D0rkerR3con v2 — installing requirements…"
+command -v python3 >/dev/null || brew install python
+pip3 install -r requirements.txt
 
-# Colors
-GREEN="\033[1;32m"
-RED="\033[1;31m"
-NC="\033[0m"
-
-echo -e "\n📦 Installing Requirements for macOS...\n"
-
-function check_install() {
-    if command -v "$1" &>/dev/null; then
-        echo -e "✅ $1 is already installed"
-    else
-        echo -e "❌ $1 not found. Installing..."
-        brew install "$2" && echo -e "${GREEN}✔ Installed: $2${NC}" || echo -e "${RED}✘ Failed to install: $2${NC}"
-    fi
-}
-
-# Check for Homebrew
-if ! command -v brew &>/dev/null; then
-    echo -e "${RED}Homebrew not found. Please install Homebrew first: https://brew.sh${NC}"
-    exit 1
+echo "[*] Installing httpx (ProjectDiscovery) for live probing…"
+if ! command -v httpx >/dev/null 2>&1; then
+  brew install httpx 2>/dev/null || { command -v go >/dev/null && go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest; }
 fi
 
-check_install "jq" "jq"
-check_install "lolcat" "lolcat"
-check_install "figlet" "figlet"
-check_install "wget" "wget"
-check_install "gum" "gum" # gum is available via Homebrew
-
-echo -e "\n${GREEN}🎉 All requirements checked and installed!${NC}\n"
+echo "[*] Installing extra URL harvesters (gau · waybackurls)…"
+command -v gau        >/dev/null 2>&1 || brew install gau 2>/dev/null        || { command -v go >/dev/null && go install -v github.com/lc/gau/v2/cmd/gau@latest; }
+command -v waybackurls>/dev/null 2>&1 || brew install waybackurls 2>/dev/null || { command -v go >/dev/null && go install -v github.com/tomnomnom/waybackurls@latest; }
+echo "[*] (optional) headless rendering:    pip3 install playwright && playwright install chromium"
+echo "[*] (optional) OSINT bridge:          pipx install recon-ng"
+echo "[+] Done. Run:  python3 d0rkerr3con.py"

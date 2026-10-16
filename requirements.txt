@@ -1,0 +1,8 @@
+# Core TUI + engine
+rich>=13.7
+questionary>=2.0
+requests>=2.31
+dnspython>=2.6
+# Optional: headless rendering for JS-heavy pages (chromium)
+#   pip install playwright && playwright install chromium
+# playwright>=1.44
