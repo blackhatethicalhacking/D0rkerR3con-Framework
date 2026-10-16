@@ -182,11 +182,11 @@ results/example.com/
 
 ## Real Demo of the Tool
 
-https://github.com/user-attachments/assets/c01dcdf9-7cdf-4851-ad3b-22d73b7f4520
 
-<!-- Add your NEW v2.0 demo video below (drag the video into a GitHub comment to get the URL):
-https://github.com/user-attachments/assets/PASTE_NEW_VIDEO_URL_HERE
--->
+
+https://github.com/user-attachments/assets/59eb2f77-f41b-4b79-adee-b31e65d7e601
+
+
 
 ---
 
